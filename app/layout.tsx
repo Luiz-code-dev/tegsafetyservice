@@ -1,48 +1,118 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Inter, JetBrains_Mono, Sora } from 'next/font/google'
+import { ThemeProvider } from '@/components/theme-provider'
+import { ConsentProvider } from '@/components/consent/consent-provider'
+import { ConsentScripts } from '@/components/consent/consent-scripts'
+import { CookieBanner } from '@/components/consent/cookie-banner'
+import { PreferencesModal } from '@/components/consent/preferences-modal'
+import { siteConfig } from '@/config/site'
 import './globals.css'
 
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const sora = Sora({ subsets: ['latin'], variable: '--font-sora', weight: ['500', '600', '700'], display: 'swap' })
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains', display: 'swap' })
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | Segurança do Trabalho em Salvador – BA`,
+    template: `%s | ${siteConfig.name}`,
   },
+  description: siteConfig.description,
+  keywords: [
+    'segurança do trabalho Salvador',
+    'consultoria SST Bahia',
+    'PGR',
+    'APR',
+    'treinamento NR-35',
+    'NR-33',
+    'NR-10',
+    'bombeiro civil Salvador',
+    'APH para eventos',
+    'resgate técnico em altura',
+    'AVCB Salvador',
+  ],
+  applicationName: siteConfig.name,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | Segurança do Trabalho em nível de excelência`,
+    description: siteConfig.description,
+    images: [{ url: '/images/hero-porto.png', width: 1376, height: 768, alt: 'Técnico de segurança inspecionando terminal portuário' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ['/images/hero-porto.png'],
+  },
+  icons: { icon: '/images/logo-teg.png', apple: '/images/logo-teg.png' },
+  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
+  colorScheme: 'dark light',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0f0d' },
+    { media: '(prefers-color-scheme: light)', color: '#f4f7f5' },
   ],
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'ProfessionalService'],
+  name: siteConfig.name,
+  slogan: siteConfig.slogan,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  image: `${siteConfig.url}/images/hero-porto.png`,
+  logo: `${siteConfig.url}/images/logo-teg.png`,
+  email: siteConfig.contact.email,
+  telephone: '+55 71 99673-9533',
+  areaServed: 'Bahia, Brasil',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: siteConfig.contact.city,
+    addressRegion: siteConfig.contact.state,
+    addressCountry: 'BR',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: siteConfig.contact.geo.lat, longitude: siteConfig.contact.geo.lng },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  },
+}
+
+const consentModeDefaults = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});`
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${inter.variable} ${sora.variable} ${jetbrains.variable} bg-background`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: consentModeDefaults }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className="font-sans antialiased">
+        <ThemeProvider>
+          <ConsentProvider>
+            {children}
+            <CookieBanner />
+            <PreferencesModal />
+            <ConsentScripts />
+          </ConsentProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

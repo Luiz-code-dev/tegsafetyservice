@@ -1,16 +1,39 @@
+import { Header } from '@/components/site/header'
+import { Hero } from '@/components/site/hero'
+import { About } from '@/components/site/about'
+import { Services } from '@/components/site/services'
+import { Norms } from '@/components/site/norms'
+import { Trainings } from '@/components/site/trainings'
+import { Emergency } from '@/components/site/emergency'
+import { Contractors } from '@/components/site/contractors'
+import { Experience } from '@/components/site/experience'
+import { Differentials } from '@/components/site/differentials'
+import { Gallery } from '@/components/site/gallery'
+import { Testimonials } from '@/components/site/testimonials'
+import { Contact } from '@/components/site/contact'
+import { Footer } from '@/components/site/footer'
+import { WhatsAppFloat } from '@/components/site/whatsapp-float'
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            T&G Safety Service
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
+    <>
+      <Header />
+      <main id="conteudo">
+        <Hero />
+        <About />
+        <Services />
+        <Norms />
+        <Trainings />
+        <Emergency />
+        <Contractors />
+        <Experience />
+        <Differentials />
+        <Gallery />
+        <Testimonials />
+        <Contact />
       </main>
-    </div>
-  );
+      <Footer />
+      <WhatsAppFloat />
+    </>
+  )
 }
