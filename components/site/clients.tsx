@@ -10,29 +10,37 @@ export function Clients() {
         <h2 id="clientes-title" className="text-center font-heading text-2xl font-semibold text-balance md:text-3xl">
           Quem confia na T&amp;G
         </h2>
-        <ul className="grid gap-4 md:grid-cols-3">
+        <ul className="grid gap-4 md:grid-cols-2">
           {clients.map((c, i) => (
             <Reveal
               as="li"
               key={c.name}
               delay={i * 0.08}
-              className="group flex min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card p-6 text-center shadow-soft"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft"
             >
-              {c.hasLogo ? (
-                <Image
-                  src={c.logo}
-                  alt={c.name}
-                  width={180}
-                  height={72}
-                  className="h-16 w-auto object-contain grayscale transition duration-300 group-hover:grayscale-0"
-                />
-              ) : (
-                <>
-                  <Building className="size-5 text-muted-foreground transition-colors group-hover:text-primary" aria-hidden />
-                  <p className="font-heading text-lg font-semibold leading-snug text-balance">{c.name}</p>
-                </>
-              )}
-              {c.servico && <p className="text-sm text-muted-foreground">{c.servico}</p>}
+              <div className="flex items-center gap-3">
+                {c.hasLogo ? (
+                  <Image
+                    src={c.logo}
+                    alt={c.name}
+                    width={140}
+                    height={56}
+                    className="h-12 w-auto object-contain grayscale transition duration-300 group-hover:grayscale-0"
+                  />
+                ) : (
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted">
+                    <Building
+                      className="size-5 text-muted-foreground transition-colors group-hover:text-primary"
+                      aria-hidden
+                    />
+                  </span>
+                )}
+                <div className="flex flex-col">
+                  <h3 className="font-heading text-lg font-semibold leading-snug text-balance">{c.name}</h3>
+                  <p className="text-sm font-medium text-primary">{c.servico}</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground text-pretty">{c.relato}</p>
             </Reveal>
           ))}
         </ul>
