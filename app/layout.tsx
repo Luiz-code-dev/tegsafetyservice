@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Inter, JetBrains_Mono, Sora } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ConsentProvider } from '@/components/consent/consent-provider'
@@ -15,22 +16,23 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Segurança do Trabalho em Salvador – BA`,
+    default: `${siteConfig.name} | Segurança do Trabalho em todo o Brasil`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
-    'segurança do trabalho Salvador',
-    'consultoria SST Bahia',
+    'segurança do trabalho',
+    'consultoria SST',
+    'engenharia de segurança do trabalho',
     'PGR',
     'APR',
     'treinamento NR-35',
     'NR-33',
     'NR-10',
-    'bombeiro civil Salvador',
+    'bombeiro civil',
     'APH para eventos',
     'resgate técnico em altura',
-    'AVCB Salvador',
+    'segurança do trabalho Salvador',
   ],
   applicationName: siteConfig.name,
   alternates: { canonical: '/' },
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ['/images/hero-porto.png'],
   },
-  icons: { icon: '/images/logo-teg.png', apple: '/images/logo-teg.png' },
+  icons: { icon: '/brand/logo-icon.svg', apple: '/images/logo-teg.png' },
   generator: 'v0.app',
 }
 
@@ -72,7 +74,7 @@ const jsonLd = {
   logo: `${siteConfig.url}/images/logo-teg.png`,
   email: siteConfig.contact.email,
   telephone: '+55 71 99673-9533',
-  areaServed: 'Bahia, Brasil',
+  areaServed: 'BR',
   address: {
     '@type': 'PostalAddress',
     addressLocality: siteConfig.contact.city,
@@ -97,14 +99,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       suppressHydrationWarning
       className={`${inter.variable} ${sora.variable} ${jetbrains.variable} bg-background`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: consentModeDefaults }} />
+      <body className="font-sans antialiased">
+        <Script id="consent-defaults" strategy="beforeInteractive">
+          {consentModeDefaults}
+        </Script>
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="font-sans antialiased">
         <ThemeProvider>
           <ConsentProvider>
             {children}

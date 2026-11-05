@@ -1,10 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { sendContact } from '@/app/actions/contact'
+import { TegSuccess } from './teg-success'
+import { Turnstile } from './turnstile'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CheckCircle2, Loader2, Mail, MapPin, Phone } from 'lucide-react'
+import { Loader2, Mail, MapPin, Phone } from 'lucide-react'
 import { contactSchema, type ContactInput } from '@/lib/contact-schema'
 import { segments } from '@/data/content'
 import { serviceTitles } from '@/data/services'
@@ -49,25 +52,29 @@ function Field({
 
 export function Contact() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({ resolver: zodResolver(contactSchema) })
+  const onToken = useCallback((t: string) => setValue('turnstileToken', t), [setValue])
 
   const onSubmit = async (data: ContactInput) => {
     setStatus('idle')
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) throw new Error()
+      const res = await sendContact(data, 'formulario')
+      if (!res.ok) {
+        setErrorMsg(res.error)
+        setStatus('error')
+        return
+      }
       setStatus('success')
       reset()
     } catch {
+      setErrorMsg('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.')
       setStatus('error')
     }
   }
@@ -116,7 +123,7 @@ export function Contact() {
               </span>
               <span className="flex flex-col">
                 <span className="text-xs text-muted-foreground">Localização</span>
-                <span className="font-semibold">{siteConfig.contact.cityDisplay} · Atendimento em toda a Bahia</span>
+                <span className="font-semibold">{siteConfig.contact.coverage}</span>
               </span>
             </li>
           </ul>
@@ -124,16 +131,7 @@ export function Contact() {
 
         <div className="border-gradient relative rounded-2xl bg-card p-6 md:p-8">
           {status === 'success' ? (
-            <div role="status" className="flex min-h-96 flex-col items-center justify-center gap-4 text-center">
-              <CheckCircle2 className="size-12 text-primary" aria-hidden />
-              <h3 className="text-2xl font-semibold">Mensagem enviada!</h3>
-              <p className="max-w-sm leading-relaxed text-muted-foreground">
-                Obrigado pelo contato. Nossa equipe retornará em breve. Se for urgente, fale conosco pelo WhatsApp.
-              </p>
-              <button type="button" onClick={() => setStatus('idle')} className="text-sm font-medium text-primary underline underline-offset-4">
-                Enviar outra mensagem
-              </button>
-            </div>
+            <TegSuccess onReset={() => setStatus('idle')} className="min-h-96" />
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4 sm:grid-cols-2">
               <Field id="name" label="Nome" required error={errors.name?.message}>
@@ -191,20 +189,23 @@ export function Contact() {
                 )}
               </div>
 
+              <div className="sm:col-span-2">
+                <Turnstile onToken={onToken} />
+              </div>
+
               {status === 'error' && (
                 <p role="alert" className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm sm:col-span-2">
-                  Não foi possível enviar agora. Tente novamente ou fale pelo{' '}
+                  {errorMsg}{' '}
                   <a href={whatsappUrl()} className="underline" target="_blank" rel="noopener noreferrer">
-                    WhatsApp
+                    Falar no WhatsApp
                   </a>
-                  .
                 </p>
               )}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-60 sm:col-span-2"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60 sm:col-span-2"
               >
                 {isSubmitting && <Loader2 className="size-4 animate-spin" aria-hidden />}
                 {isSubmitting ? 'Enviando...' : 'Enviar solicitação'}

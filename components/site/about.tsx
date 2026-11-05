@@ -18,7 +18,7 @@ export function About() {
                 <span className="text-primary">resultados</span>.
               </>
             }
-            description="A T&G Safety Service é especializada em Engenharia e Segurança do Trabalho em Salvador – BA. Atuamos lado a lado com a operação para transformar normas em rotinas práticas, reduzir riscos e garantir conformidade legal, com atendimento próximo e soluções adaptadas à realidade de cada empresa."
+            description="A T&G Safety Service é especializada em Engenharia e Segurança do Trabalho, com sede em Salvador – BA e atendimento em todo o Brasil. Atuamos lado a lado com a operação para transformar normas em rotinas práticas, reduzir riscos e garantir conformidade legal, com atendimento próximo e soluções adaptadas à realidade de cada empresa."
           />
           <ul className="flex flex-col gap-4">
             {pillars.map((p, i) => (

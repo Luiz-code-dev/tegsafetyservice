@@ -4,7 +4,7 @@ export const siteConfig = {
   slogan: 'Pessoas Seguras, Resultados Sustentáveis',
   tagline: 'Soluções em Segurança do Trabalho',
   description:
-    'Engenharia e Segurança do Trabalho em Salvador – BA: consultoria SST, PGR, APR, inspeções, treinamentos NR-35, NR-33, NR-10, bombeiro civil, APH para eventos e resgate técnico.',
+    'Engenharia e Segurança do Trabalho com atendimento em todo o Brasil: consultoria SST, PGR, APR, inspeções, treinamentos NR-35, NR-33, NR-10, bombeiro civil, APH para eventos e resgate técnico.',
   url: 'https://tegsafetyservice.com.br',
   locale: 'pt_BR',
   contact: {
@@ -14,6 +14,8 @@ export const siteConfig = {
     city: 'Salvador',
     state: 'BA',
     cityDisplay: 'Salvador – BA',
+    coverage: 'Sede em Salvador – BA · Atendimento em todo o Brasil',
+    phoneTel: '+5571996739533',
     geo: { lat: -12.9714, lng: -38.5014 },
   },
   whatsappMessage:
@@ -33,6 +35,9 @@ export const siteConfig = {
     youtube: '#',
   },
 } as const
+
+/** Set to true once /public/models/teg.glb exists to render the real 3D mascot. */
+export const USE_3D_MODEL = false
 
 export function whatsappUrl(message: string = siteConfig.whatsappMessage) {
   return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`
