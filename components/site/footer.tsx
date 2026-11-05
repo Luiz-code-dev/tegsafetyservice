@@ -90,7 +90,7 @@ export function Footer() {
         </p>
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-xs text-muted-foreground sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
-            © {year} {siteConfig.name}. CNPJ {siteConfig.company.cnpj}. Todos os direitos reservados.
+            © {year} {siteConfig.name}. Todos os direitos reservados.
           </p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">
             {legalLinks.map((l) => (

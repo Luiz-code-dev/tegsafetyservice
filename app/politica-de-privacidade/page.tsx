@@ -18,7 +18,7 @@ export default function Page() {
     >
       <LegalSection title="1. Controlador dos dados">
         <p>
-          {company.legalName} ({siteConfig.name}), inscrita no CNPJ {company.cnpj}, com sede em {company.address}, é a
+          {company.legalName} ({siteConfig.name}), com sede em {company.address}, é a
           controladora dos dados pessoais tratados neste site.
         </p>
       </LegalSection>

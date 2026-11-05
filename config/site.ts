@@ -22,7 +22,6 @@ export const siteConfig = {
     'Olá! Vim pelo site e gostaria de um diagnóstico de SST para minha empresa.',
   company: {
     legalName: '[RAZÃO SOCIAL]',
-    cnpj: '[XX.XXX.XXX/0001-XX]',
     address: '[ENDEREÇO COMPLETO]',
   },
   dpo: {
