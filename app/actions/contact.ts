@@ -49,7 +49,7 @@ export async function sendContact(input: unknown, origin: 'formulario' | 'modal'
   }
 
   // RESEND_API_KEY may hold a literal placeholder string; only accept real Resend keys (prefixed "re_").
-  const apiKey = [process.env.RESEND_API_KEY_4]
+  const apiKey = [process.env.RESEND_API_KEY]
     .map((k) => k?.trim().replace(/^["']|["']$/g, ''))
     .find((k) => k?.startsWith('re_'))
   if (!apiKey) {
