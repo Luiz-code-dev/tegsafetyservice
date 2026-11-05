@@ -116,20 +116,20 @@ export function Hero() {
             className="flex flex-col gap-3 sm:flex-row"
           >
             <a
+              href="#contato"
+              className="group inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            >
+              Fale com um especialista
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+            </a>
+            <a
               href={whatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              <WhatsAppIcon className="size-5" />
-              Fale com um especialista
-            </a>
-            <a
-              href="#servicos"
               className="glass group inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-foreground transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
-              Conheça nossos serviços
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+              <WhatsAppIcon className="size-5 text-primary" />
+              Tire dúvidas no WhatsApp
             </a>
           </motion.div>
         </div>

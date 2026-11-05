@@ -97,9 +97,7 @@ export function Header() {
           </a>
           <ThemeToggle />
           <a
-            href={whatsappUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#contato"
             className="hidden h-9 items-center whitespace-nowrap rounded-lg border border-primary/60 px-4 text-sm font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring xl:inline-flex"
           >
             Fale com um especialista
@@ -131,9 +129,8 @@ export function Header() {
               </nav>
               <div className="mt-auto flex flex-col gap-3">
                 <a
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/#contato"
+                  onClick={() => setOpen(false)}
                   className="inline-flex h-12 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground"
                 >
                   Fale com um especialista
