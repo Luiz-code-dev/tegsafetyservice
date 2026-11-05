@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { Mail, MessageSquareText, Phone, X } from 'lucide-react'
-import { siteConfig, whatsappUrl } from '@/config/site'
+import { siteConfig, emailUrl, whatsappUrl } from '@/config/site'
 import { cn } from '@/lib/utils'
 import { WhatsAppIcon } from './whatsapp-icon'
 import { InstagramIcon } from './instagram-icon'
@@ -25,7 +25,7 @@ const channels = [
   {
     label: 'E-mail',
     detail: siteConfig.contact.email,
-    href: `mailto:${siteConfig.contact.email}`,
+    href: emailUrl(),
     external: false,
     Icon: Mail,
   },

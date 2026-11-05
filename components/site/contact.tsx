@@ -11,7 +11,7 @@ import { Loader2, Mail, MapPin, Phone } from 'lucide-react'
 import { contactSchema, type ContactInput } from '@/lib/contact-schema'
 import { segments } from '@/data/content'
 import { serviceTitles } from '@/data/services'
-import { siteConfig, whatsappUrl } from '@/config/site'
+import { siteConfig, emailUrl, whatsappUrl } from '@/config/site'
 import { cn } from '@/lib/utils'
 import { SectionHeading } from './section-heading'
 import { WhatsAppIcon } from './whatsapp-icon'
@@ -107,7 +107,7 @@ export function Contact() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50">
+              <a href={emailUrl()} className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/50">
                 <span className="flex size-11 items-center justify-center rounded-lg bg-accent text-primary">
                   <Mail className="size-5" aria-hidden />
                 </span>

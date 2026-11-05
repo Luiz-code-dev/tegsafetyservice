@@ -62,6 +62,23 @@ export const mascotAssets = {
   hasVariations: false,
 } as const
 
+const emailSubject = 'Solicitação de orçamento – Segurança do Trabalho'
+const emailBody = `Olá, equipe T&G Safety Service!
+
+Gostaria de solicitar um orçamento e mais informações sobre os serviços de Segurança e Saúde do Trabalho.
+
+Empresa:
+Segmento:
+Serviço de interesse:
+Telefone para contato:
+
+Fico no aguardo do retorno.
+Obrigado(a)!`
+
+export function emailUrl(subject: string = emailSubject, body: string = emailBody) {
+  return `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
 export function whatsappUrl(message: string = siteConfig.whatsappMessage) {
   return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`
 }

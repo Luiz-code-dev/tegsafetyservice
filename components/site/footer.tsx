@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { navItems, responsavelTecnicoLinha, secondaryNavItems, siteConfig, whatsappUrl } from '@/config/site'
+import { navItems, responsavelTecnicoLinha, secondaryNavItems, siteConfig, emailUrl, whatsappUrl } from '@/config/site'
 import { services } from '@/data/services'
 import { useConsent } from '@/components/consent/consent-provider'
 import { Logo } from './logo'
@@ -70,7 +70,7 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${siteConfig.contact.email}`} className="break-all hover:text-primary">
+              <a href={emailUrl()} className="break-all hover:text-primary">
                 {siteConfig.contact.email}
               </a>
             </li>

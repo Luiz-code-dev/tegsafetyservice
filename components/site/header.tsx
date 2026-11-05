@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes'
 import { Menu, Moon, Sun } from 'lucide-react'
 import { motion, useScroll, useSpring } from 'motion/react'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { navItems, secondaryNavItems, siteConfig, whatsappUrl } from '@/config/site'
+import { navItems, secondaryNavItems, siteConfig, emailUrl, whatsappUrl } from '@/config/site'
 import { useConsent } from '@/components/consent/consent-provider'
 import { cn } from '@/lib/utils'
 import { Logo } from './logo'
@@ -142,7 +142,7 @@ export function Header() {
                     </a>
                   </li>
                   <li>
-                    <a href={`mailto:${siteConfig.contact.email}`} className="break-all hover:text-primary">
+                    <a href={emailUrl()} className="break-all hover:text-primary">
                       {siteConfig.contact.email}
                     </a>
                   </li>
