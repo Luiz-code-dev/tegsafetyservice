@@ -48,8 +48,20 @@ export const siteConfig = {
 
 export const responsavelTecnicoLinha = `Responsável Técnico: Eng. ${siteConfig.responsavelTecnico.nome} · ${siteConfig.responsavelTecnico.titulo} · ${siteConfig.responsavelTecnico.conselho} ${siteConfig.responsavelTecnico.registro} · RNP ${siteConfig.responsavelTecnico.rnp}`
 
-/** Set to true once /public/models/teg.glb exists to render the real 3D mascot. */
-export const USE_3D_MODEL = false
+/**
+ * Ative (true) somente depois de salvar a arte oficial em /public/mascot/teg.png.
+ * Variações opcionais: teg-walk.png, teg-watch.png e teg-ball.png.
+ */
+export const SHOW_MASCOT = false
+
+export const mascotAssets = {
+  base: '/mascot/teg.png',
+  walk: '/mascot/teg-walk.png',
+  watch: '/mascot/teg-watch.png',
+  ball: '/mascot/teg-ball.png',
+  /** Mude para true quando as variações existirem em /public/mascot. */
+  hasVariations: false,
+} as const
 
 export function whatsappUrl(message: string = siteConfig.whatsappMessage) {
   return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`

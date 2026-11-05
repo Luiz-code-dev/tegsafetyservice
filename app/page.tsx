@@ -13,7 +13,8 @@ import { Testimonials } from '@/components/site/testimonials'
 import { Contact } from '@/components/site/contact'
 import { Footer } from '@/components/site/footer'
 import { WhatsAppFloat } from '@/components/site/whatsapp-float'
-import { GuardianSection } from '@/components/site/guardian-section'
+import { MascotBand } from '@/components/site/mascot-band'
+import { SHOW_MASCOT } from '@/config/site'
 
 export default function Home() {
   return (
@@ -23,13 +24,13 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
+        {SHOW_MASCOT && <MascotBand />}
         <Norms />
         <Trainings />
         <Emergency />
         <Contractors />
         <Experience />
         <Differentials />
-        <GuardianSection />
         <Gallery />
         <Testimonials />
         <Contact />

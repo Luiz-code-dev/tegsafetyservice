@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
 import { sendContact } from '@/app/actions/contact'
-import { TegSuccess } from './teg-success'
+import { SuccessState } from './success-state'
 import { Turnstile } from './turnstile'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -131,7 +131,7 @@ export function Contact() {
 
         <div className="border-gradient relative rounded-2xl bg-card p-6 md:p-8">
           {status === 'success' ? (
-            <TegSuccess onReset={() => setStatus('idle')} className="min-h-96" />
+            <SuccessState onReset={() => setStatus('idle')} className="min-h-96" />
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4 sm:grid-cols-2">
               <Field id="name" label="Nome" required error={errors.name?.message}>

@@ -65,7 +65,7 @@ export function WhatsAppFloat() {
   }, [open])
 
   return (
-    <div ref={rootRef} data-print-hidden className="fixed right-4 bottom-4 z-40 flex flex-col items-end gap-3">
+    <div ref={rootRef} data-print-hidden className="fixed right-5 bottom-5 z-40 flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
       <ul
         id={menuId}
         aria-label="Canais de contato"

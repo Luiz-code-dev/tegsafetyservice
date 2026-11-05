@@ -48,10 +48,10 @@ export function Gallery() {
                   'group relative block w-full overflow-hidden rounded-2xl border border-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
                   g.tall ? 'aspect-[3/4]' : 'aspect-[4/3]',
                 )}
-                aria-label={`Ampliar: ${g.alt}`}
+                aria-label={`Ampliar imagem: ${g.label}`}
               >
                 <Image src={g.src} alt={g.alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <span className="glass absolute bottom-3 left-3 rounded-full border border-border px-3 py-1 text-xs">{g.category}</span>
+                <span aria-hidden className="glass absolute bottom-3 left-3 rounded-full border border-border px-3 py-1 font-mono text-[11px] tracking-wider text-primary uppercase">{g.label}</span>
               </button>
             </li>
           ))}
@@ -68,12 +68,15 @@ export function Gallery() {
         >
           {current && (
             <figure className="flex flex-col gap-2">
-              <DialogTitle className="sr-only">{current.alt}</DialogTitle>
+              <DialogTitle className="sr-only">{current.label}</DialogTitle>
               <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
                 <Image src={current.src} alt={current.alt} fill sizes="95vw" className="object-contain" />
               </div>
               <figcaption className="flex items-center justify-between gap-4 px-2 pb-1">
-                <span className="text-sm text-muted-foreground">{current.alt}</span>
+                <span className="flex flex-col gap-1">
+                  <span className="font-mono text-[11px] tracking-wider text-primary uppercase">{current.label}</span>
+                  {current.detail && <span className="text-sm text-muted-foreground">{current.detail}</span>}
+                </span>
                 <span className="flex gap-2">
                   <button type="button" onClick={() => step(-1)} className="flex size-9 items-center justify-center rounded-lg border border-border" aria-label="Imagem anterior">
                     <ChevronLeft className="size-4" aria-hidden />
