@@ -20,7 +20,7 @@ const rights = [
 ]
 
 export default function Page() {
-  const { dpo } = siteConfig
+  const dpo = siteConfig.encarregado
   const mailto = `mailto:${dpo.email}?subject=${encodeURIComponent('Solicitação LGPD – Direitos do Titular')}`
   return (
     <LegalPage

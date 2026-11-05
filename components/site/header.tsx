@@ -137,11 +137,6 @@ export function Header() {
                 </a>
                 <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
                   <li>
-                    <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
-                      WhatsApp {siteConfig.contact.whatsappDisplay}
-                    </a>
-                  </li>
-                  <li>
                     <a href={emailUrl()} className="break-all hover:text-primary">
                       {siteConfig.contact.email}
                     </a>

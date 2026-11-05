@@ -1,30 +1,35 @@
 import {
   Ambulance,
+  Anchor,
   BadgeCheck,
   BookOpenCheck,
+  Building2,
   ClipboardList,
   Cog,
   Eye,
-  FileCheck2,
+  Factory,
   FileText,
-  Flame,
-  HeartPulse,
   Lock,
   MessagesSquare,
-  Mountain,
+  PartyPopper,
+  Ship,
   Siren,
   ShieldAlert,
-  Stethoscope,
   UserCheck,
-  Users,
+  Warehouse,
+  Wheat,
   type LucideIcon,
 } from 'lucide-react'
 
-export const heroStats = [
-  { value: 15, prefix: '+', suffix: '', label: 'NRs atendidas' },
-  { value: 24, prefix: '', suffix: '/7', label: 'Atendimento em emergências' },
-  { value: 100, prefix: '', suffix: '%', label: 'Foco em conformidade legal' },
-  { value: 9, prefix: '', suffix: '', label: 'Frentes de serviço' },
+export type HeroStat =
+  | { kind: 'number'; value: number; prefix?: string; suffix?: string; label: string }
+  | { kind: 'text'; text: string; label: string }
+
+export const heroStats: HeroStat[] = [
+  { kind: 'number', value: 15, suffix: '+', label: 'NRs atendidas' },
+  { kind: 'number', value: 24, suffix: '/7', label: 'Prontidão em emergências' },
+  { kind: 'number', value: 9, label: 'Frentes de serviço' },
+  { kind: 'text', text: 'CREA-BA', label: 'Responsável técnico habilitado' },
 ]
 
 export const pillars = [
@@ -43,6 +48,11 @@ export const pillars = [
     text: 'Soluções desenhadas para a realidade operacional de cada empresa.',
     icon: UserCheck,
   },
+  {
+    title: 'Linguagem simples, documentação sob medida',
+    text: 'Orientações claras para equipes operacionais e documentos adaptados à rotina da sua empresa.',
+    icon: FileText,
+  },
 ]
 
 export const trainings: { title: string; icon: LucideIcon }[] = [
@@ -57,19 +67,8 @@ export const trainings: { title: string; icon: LucideIcon }[] = [
 ]
 
 export const trainingPhotos = [
-  { src: '/images/treinamento-sala.png', alt: 'Treinamento em sala com equipe atenta' },
-  { src: '/images/dds-canteiro.png', alt: 'DDS no canteiro de obras' },
-  { src: '/images/brigada-simulado.png', alt: 'Simulado de abandono de área com brigadistas' },
-  { src: '/images/bombeiro-civil.png', alt: 'Treinamento de combate a princípio de incêndio' },
-]
-
-export const emergencyBlocks: { title: string; text: string; icon: LucideIcon }[] = [
-  { title: 'Brigada de Emergência', text: 'Formação, reciclagem e simulados conforme a realidade da planta.', icon: Users },
-  { title: 'Lei Lucas', text: 'Capacitação em primeiros socorros para escolas e instituições.', icon: HeartPulse },
-  { title: 'SBV / APH', text: 'Suporte Básico de Vida e atendimento pré-hospitalar com equipe qualificada.', icon: Stethoscope },
-  { title: 'Resgate Técnico Operacional', text: 'Equipes de prontidão para altura e espaços confinados.', icon: Mountain },
-  { title: 'Bombeiro Civil', text: 'Postos de prevenção e combate a princípios de incêndio.', icon: Flame },
-  { title: 'AVCB', text: 'Apoio técnico para obtenção e manutenção do Auto de Vistoria.', icon: FileCheck2 },
+  { src: '/images/dds-canteiro.png', alt: 'Diálogo Diário de Segurança com equipe em canteiro de obras' },
+  { src: '/images/bombeiro-combate.png', alt: 'Bombeiro com roupa de aproximação usando extintor em treinamento controlado' },
 ]
 
 export const contractorSteps = [
@@ -81,28 +80,20 @@ export const contractorSteps = [
   { title: 'Acompanhamento em campo', text: 'Inspeções e suporte técnico durante a execução.' },
 ]
 
-export const experience = [
-  { title: 'Operações portuárias', image: '/images/hero-porto.png', span: 'lg:col-span-2 lg:row-span-2' },
-  { title: 'Armazenagem e movimentação de grãos', image: '/images/silos-graos.png', span: '' },
-  { title: 'Silos e armazéns', image: '/images/silos-graos.png', span: '' },
-  { title: 'Máquinas e equipamentos', image: '/images/inspecao-industrial.png', span: '' },
-  { title: 'Transportadores de correia', image: '/images/maquinas-esteira.png', span: '' },
-  { title: 'Operações com shiploader', image: '/images/hero-porto.png', span: '' },
-  { title: 'Atividades e instalações elétricas', image: '/images/eletrica-nr10.png', span: 'lg:row-span-2' },
-  { title: 'Bloqueio e etiquetagem (LOTO)', image: '/images/eletrica-nr10.png', span: '' },
-  { title: 'Trabalho em altura', image: '/images/trabalho-altura.png', span: '' },
-  { title: 'Espaços confinados', image: '/images/espaco-confinado.png', span: '' },
-  { title: 'Gestão de contratadas', image: '/images/terceirizadas-portaria.png', span: '' },
-  { title: 'APR, inspeções e checklists', image: '/images/auditoria-documental.png', span: 'lg:col-span-2' },
-]
+export const experienceImage = {
+  src: '/images/silos-graos.png',
+  alt: 'Complexo de silos e armazéns de grãos em área portuária',
+}
 
-export const differentials = [
-  'Experiência prática em ambiente operacional',
-  'Visão preventiva e foco em controle de riscos',
-  'Documentação adaptada à realidade da empresa',
-  'Linguagem simples para equipes operacionais',
-  'Conformidade legal e melhoria contínua',
-  'Atendimento personalizado e próximo',
+export const experience: { title: string; icon: LucideIcon }[] = [
+  { title: 'Portos', icon: Anchor },
+  { title: 'Movimentação de grãos', icon: Wheat },
+  { title: 'Silos e armazéns', icon: Warehouse },
+  { title: 'Correias transportadoras', icon: Cog },
+  { title: 'Shiploader', icon: Ship },
+  { title: 'Indústria', icon: Factory },
+  { title: 'Construção civil', icon: Building2 },
+  { title: 'Eventos', icon: PartyPopper },
 ]
 
 export const processSteps = [

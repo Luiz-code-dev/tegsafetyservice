@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { sendContact } from '@/app/actions/contact'
+import { SELECT_SERVICE_EVENT } from '@/lib/service-events'
 import { SuccessState } from './success-state'
 import { Turnstile } from './turnstile'
 import { useForm } from 'react-hook-form'
@@ -17,7 +18,7 @@ import { SectionHeading } from './section-heading'
 import { WhatsAppIcon } from './whatsapp-icon'
 
 const field =
-  'h-12 w-full rounded-lg border border-input bg-background/60 px-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/30 aria-[invalid=true]:border-destructive'
+  'h-12 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/30 aria-[invalid=true]:border-destructive'
 
 function Field({
   id,
@@ -61,6 +62,17 @@ export function Contact() {
     formState: { errors, isSubmitting },
   } = useForm<ContactInput>({ resolver: zodResolver(contactSchema) })
   const onToken = useCallback((t: string) => setValue('turnstileToken', t), [setValue])
+
+  useEffect(() => {
+    const onSelect = (e: Event) => {
+      const title = (e as CustomEvent<string>).detail
+      setStatus('idle')
+      setValue('service', title, { shouldDirty: true })
+      setTimeout(() => document.getElementById('name')?.focus({ preventScroll: true }), 600)
+    }
+    window.addEventListener(SELECT_SERVICE_EVENT, onSelect)
+    return () => window.removeEventListener(SELECT_SERVICE_EVENT, onSelect)
+  }, [setValue])
 
   const onSubmit = async (data: ContactInput) => {
     setStatus('idle')

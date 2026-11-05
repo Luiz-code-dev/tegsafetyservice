@@ -23,23 +23,15 @@ export type GalleryItem = {
 }
 
 /**
- * Para usar fotos reais: salve o arquivo em /public/images e adicione/substitua
- * um item aqui. A ordem do array é a ordem exibida na galeria.
+ * Cada imagem aparece uma única vez no site: as fotos daqui não são usadas em
+ * nenhuma outra seção. Para usar fotos reais, salve em /public/images e
+ * adicione/substitua um item. A ordem do array é a ordem exibida.
  */
 export const gallery: GalleryItem[] = [
-  { src: '/images/inspecao-industrial.png', alt: 'Engenheira de segurança inspecionando máquinas com checklist digital', category: 'Inspeções', label: 'Inspeções e auditorias', detail: 'Diagnóstico de SST em áreas operacionais', tall: true },
-  { src: '/images/treinamento-sala.png', alt: 'Instrutor ministrando treinamento de segurança em sala moderna', category: 'Treinamentos', label: 'Treinamentos', detail: 'Capacitação e reciclagem em NRs' },
-  { src: '/images/resgate-tecnico.png', alt: 'Equipe de resgate em altura com cordas e maca', category: 'Resgate', label: 'Resgate técnico', detail: 'Altura e espaços confinados' },
-  { src: '/images/aph-atendimento.png', alt: 'Socorristas prestando atendimento pré-hospitalar com ambulância ao fundo', category: 'APH', label: 'Atendimento pré-hospitalar', detail: 'Equipes de APH para operações e eventos', tall: true },
-  { src: '/images/bombeiro-civil.png', alt: 'Bombeiro civil combatendo princípio de incêndio em treinamento controlado', category: 'Bombeiro Civil', label: 'Bombeiro civil', detail: 'Prevenção e combate a incêndio' },
-  { src: '/images/eventos-alto-padrao.png', alt: 'Posto discreto de bombeiro civil e APH em evento corporativo noturno', category: 'Eventos', label: 'Eventos', detail: 'Prontidão discreta para eventos corporativos' },
-  { src: '/images/dds-canteiro.png', alt: 'Equipe em semicírculo durante Diálogo Diário de Segurança', category: 'Treinamentos', label: 'Treinamentos', detail: 'Diálogo Diário de Segurança', tall: true },
-  { src: '/images/espaco-confinado.png', alt: 'Vigia com detector de gases na entrada de espaço confinado com tripé de resgate', category: 'Inspeções', label: 'NR-33', detail: 'Espaços confinados' },
-  { src: '/images/brigada-simulado.png', alt: 'Brigadistas conduzindo simulado de abandono de área', category: 'Bombeiro Civil', label: 'Emergência', detail: 'Brigada e simulados de abandono' },
-  { src: '/images/construcao-nr18.png', alt: 'Técnico fiscalizando obra com guarda-corpos e redes de proteção', category: 'Inspeções', label: 'NR-18', detail: 'Segurança na construção' },
-  { src: '/images/trabalho-altura.png', alt: 'Profissional com cinto paraquedista ancorado em estrutura metálica', category: 'Resgate', label: 'NR-35', detail: 'Trabalho em altura', tall: true },
-  { src: '/images/terceirizadas-portaria.png', alt: 'Controle de acesso de terceirizados em portaria industrial', category: 'Inspeções', label: 'Terceirizadas', detail: 'Controle e liberação de contratadas' },
-  { src: '/images/eletrica-nr10.png', alt: 'Eletricista com EPI aplicando cadeado e etiqueta de bloqueio em painel elétrico', category: 'Inspeções', label: 'NR-10', detail: 'Bloqueio e etiquetagem' },
-  { src: '/images/auditoria-documental.png', alt: 'Especialista revisando documentação de segurança em escritório', category: 'Inspeções', label: 'Gestão de SST', detail: 'Documentação e conformidade legal' },
-  { src: '/images/locacao-equipamentos.png', alt: 'Macas, cordas e kits de emergência organizados em depósito', category: 'Resgate', label: 'Locação', detail: 'Equipamentos de emergência e resgate' },
+  { src: '/images/eletrica-nr10.png', alt: 'Eletricista com luvas isolantes aplicando cadeado de bloqueio em painel elétrico', category: 'Inspeções', label: 'Inspeções · NR-10', detail: 'Bloqueio e etiquetagem em instalações elétricas', tall: true },
+  { src: '/images/trabalho-altura.png', alt: 'Trabalhador com cinto paraquedista ancorado em estrutura metálica elevada', category: 'Treinamentos', label: 'Treinamentos · NR-35', detail: 'Capacitação para trabalho em altura' },
+  { src: '/images/espaco-confinado.png', alt: 'Equipe de resgate operando tripé sobre boca de visita em espaço confinado', category: 'Resgate', label: 'Resgate · Espaço confinado', detail: 'Equipe de prontidão conforme NR-33', tall: true },
+  { src: '/images/aph-evento.png', alt: 'Socorristas de APH em posto de atendimento discreto durante evento noturno', category: 'APH', label: 'APH · Eventos', detail: 'Atendimento pré-hospitalar com equipe qualificada' },
+  { src: '/images/brigada-simulado.png', alt: 'Brigadistas de colete laranja conduzindo simulado de abandono de área', category: 'Bombeiro Civil', label: 'Bombeiro Civil · Brigada', detail: 'Formação de brigada e simulados de abandono', tall: true },
+  { src: '/images/eventos-alto-padrao.png', alt: 'Posto discreto de prevenção em evento corporativo de alto padrão', category: 'Eventos', label: 'Eventos · Alto padrão', detail: 'Prontidão discreta para eventos corporativos' },
 ]

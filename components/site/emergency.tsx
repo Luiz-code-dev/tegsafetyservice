@@ -1,76 +1,63 @@
-import Image from 'next/image'
-import { Siren } from 'lucide-react'
-import { emergencyBlocks } from '@/data/content'
-import { siteConfig, whatsappUrl } from '@/config/site'
+import { ArrowRight, PartyPopper, Siren } from 'lucide-react'
 import { Reveal } from './reveal'
-import { SectionHeading } from './section-heading'
 
 export function Emergency() {
   return (
-    <section id="emergencia" aria-labelledby="emergencia-title" className="relative isolate overflow-hidden py-24 md:py-32">
-      <Image src="/images/resgate-tecnico.png" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-30" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background/85 to-background" />
-      <div aria-hidden className="hazard-tape absolute inset-x-0 top-0 h-2 opacity-80" />
-
-      <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 md:px-6">
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <SectionHeading
-            id="emergencia-title"
-            eyebrow="Emergência & Resgate"
-            title="Prontidão para os momentos que não admitem erro"
-            description="Equipes qualificadas para prevenção, resposta e resgate em operações industriais, obras e eventos de alto padrão."
-          />
-          <a
-            href={whatsappUrl('URGENTE: preciso de equipe de emergência/resgate.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-13 shrink-0 items-center gap-3 rounded-xl border border-alert/50 bg-alert/10 px-5 text-sm font-semibold text-foreground transition-colors hover:bg-alert/20"
-          >
-            <span className="relative flex size-3">
-              <span className="animate-pulse-ring absolute inline-flex size-full rounded-full bg-alert" />
-              <span className="relative inline-flex size-3 rounded-full bg-alert" />
+    <section id="emergencia" aria-labelledby="emergencia-title" className="bg-section py-16 md:py-20">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 md:px-6">
+        <Reveal className="relative flex flex-col gap-6 overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-soft md:flex-row md:items-center md:justify-between md:p-10">
+          <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-emergency" />
+          <div className="flex items-start gap-4">
+            <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-emergency/10 text-emergency">
+              <Siren className="size-6" aria-hidden />
             </span>
-            <Siren className="size-4 text-alert" aria-hidden />
-            Plantão 24/7 · {siteConfig.contact.whatsappDisplay}
+            <div className="flex flex-col gap-2">
+              <span className="w-fit rounded-full bg-emergency px-2.5 py-0.5 font-mono text-xs font-semibold tracking-wider text-primary-foreground uppercase">
+                24/7
+              </span>
+              <h2 id="emergencia-title" className="font-heading text-2xl font-semibold text-balance md:text-3xl">
+                Prontidão 24/7 para operações e eventos
+              </h2>
+              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Equipes de bombeiro civil, resgate técnico e APH mobilizadas para a sua operação. Veja o escopo de cada
+                uma em Serviços.
+              </p>
+            </div>
+          </div>
+          <a
+            href="#contato"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-emergency px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Solicitar equipe
+            <ArrowRight className="size-4" aria-hidden />
           </a>
-        </div>
+        </Reveal>
 
-        <ul className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {emergencyBlocks.map((b, i) => (
-            <Reveal as="li" key={b.title} delay={(i % 3) * 0.08} className="glass group flex flex-col gap-4 p-6 transition-colors hover:bg-accent/60 md:p-8">
-              <b.icon className="size-7 text-primary transition-transform group-hover:scale-110" aria-hidden />
-              <h3 className="text-xl font-semibold">{b.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{b.text}</p>
-            </Reveal>
-          ))}
-        </ul>
-
-        <Reveal className="grid overflow-hidden rounded-2xl border border-border bg-card md:grid-cols-2">
-          <div className="relative aspect-[16/10] md:aspect-auto">
-            <Image
-              src="/images/eventos-alto-padrao.png"
-              alt="Posto de bombeiro civil e APH em evento corporativo"
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-            />
+        <Reveal
+          delay={0.08}
+          className="flex flex-col gap-6 rounded-2xl border border-border bg-card p-8 shadow-soft md:flex-row md:items-center md:justify-between md:p-10"
+        >
+          <div className="flex items-start gap-4">
+            <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent text-primary">
+              <PartyPopper className="size-6" aria-hidden />
+            </span>
+            <div className="flex flex-col gap-2">
+              <p className="font-mono text-xs tracking-widest text-primary uppercase">Eventos</p>
+              <h3 className="font-heading text-xl font-semibold text-balance md:text-2xl">
+                Segurança discreta para eventos de alto padrão
+              </h3>
+              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Postura profissional, uniformes alinhados ao padrão do seu evento e presença que protege sem chamar
+                atenção.
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col gap-4 p-8 md:p-10">
-            <p className="font-mono text-xs tracking-widest text-primary uppercase">Eventos</p>
-            <h3 className="text-2xl font-semibold text-balance">Segurança discreta para eventos de alto padrão</h3>
-            <p className="leading-relaxed text-muted-foreground">
-              Bombeiros civis, socorristas, enfermagem e ambulância com postura profissional e uniformes alinhados ao
-              padrão do seu evento. Planejamento de rotas de fuga, plano de emergência e apoio ao AVCB.
-            </p>
-            <a
-              href={whatsappUrl('Olá! Preciso de equipe de segurança/APH para um evento.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex h-12 w-fit items-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground"
-            >
-              Orçar para meu evento
-            </a>
-          </div>
+          <a
+            href="#contato"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl border border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Orçar para meu evento
+          </a>
         </Reveal>
       </div>
     </section>

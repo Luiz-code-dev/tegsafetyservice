@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { navItems, responsavelTecnicoLinha, secondaryNavItems, siteConfig, emailUrl, whatsappUrl } from '@/config/site'
 import { services } from '@/data/services'
+import { serviceHref } from '@/lib/service-events'
 import { useConsent } from '@/components/consent/consent-provider'
 import { Logo } from './logo'
 import { InstagramIcon } from './instagram-icon'
@@ -53,7 +54,7 @@ export function Footer() {
           <ul className="flex flex-col gap-2">
             {services.slice(0, 7).map((s) => (
               <li key={s.slug}>
-                <Link href="/#servicos" className="text-sm text-muted-foreground hover:text-primary">
+                <Link href={serviceHref(s.slug)} scroll={false} className="text-sm text-muted-foreground hover:text-primary">
                   {s.title}
                 </Link>
               </li>
@@ -90,7 +91,8 @@ export function Footer() {
         </p>
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-xs text-muted-foreground sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
-            © {year} {siteConfig.name}. Todos os direitos reservados.
+            © {year} {siteConfig.empresa.razaoSocial || siteConfig.name}
+            {siteConfig.empresa.cnpj ? ` · CNPJ ${siteConfig.empresa.cnpj}` : ''}. Todos os direitos reservados.
           </p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">
             {legalLinks.map((l) => (

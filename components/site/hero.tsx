@@ -1,33 +1,46 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { animate, motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { ArrowDown, ArrowRight } from 'lucide-react'
 import { heroStats } from '@/data/content'
-import { siteConfig, whatsappUrl } from '@/config/site'
+import { whatsappUrl } from '@/config/site'
 import { WhatsAppIcon } from './whatsapp-icon'
 
-function Counter({ value, prefix, suffix }: { value: number; prefix: string; suffix: string }) {
+/** Server HTML always contains the final value; the count-up only runs on the client. */
+function Counter({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true })
   const reduce = useReducedMotion()
-  const [display, setDisplay] = useState(reduce ? value : 0)
 
   useEffect(() => {
-    if (!inView || reduce) return
-    const controls = animate(0, value, { duration: 1.6, ease: 'easeOut', onUpdate: (v) => setDisplay(Math.round(v)) })
-    return () => controls.stop()
+    const node = ref.current
+    if (!inView || reduce || !node) return
+    const controls = animate(0, value, {
+      duration: 1.4,
+      ease: 'easeOut',
+      onUpdate: (v) => {
+        node.textContent = String(Math.round(v))
+      },
+    })
+    return () => {
+      controls.stop()
+      node.textContent = String(value)
+    }
   }, [inView, value, reduce])
 
   return (
-    <span ref={ref} className="font-mono tabular-nums">
+    <span className="font-mono tabular-nums">
       {prefix}
-      {display}
+      <span ref={ref}>{value}</span>
       {suffix}
     </span>
   )
 }
+
+const titleWords = ['Segurança', 'do', 'Trabalho', 'em', 'nível', 'de']
+const titleText = `${titleWords.join(' ')} excelência.`
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
@@ -35,14 +48,12 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%'])
 
-  const words = ['Segurança', 'do', 'Trabalho', 'em', 'nível', 'de']
-
   return (
     <section
       ref={ref}
       id="inicio"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden pt-20 md:pt-24"
+      className="dark relative isolate flex min-h-dvh flex-col justify-end overflow-hidden bg-background pt-20 text-foreground md:pt-24"
     >
       <motion.div className="absolute inset-0 -z-20" style={{ y }}>
         <Image
@@ -56,10 +67,8 @@ export function Hero() {
       </motion.div>
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,var(--background)_8%,color-mix(in_oklab,var(--background)_75%,transparent)_45%,color-mix(in_oklab,var(--background)_35%,transparent))]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,var(--background)_6%,color-mix(in_oklab,var(--background)_78%,transparent)_45%,color-mix(in_oklab,var(--background)_45%,transparent))]"
       />
-      <div aria-hidden className="bg-blueprint absolute inset-0 -z-10 opacity-60" />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-transparent via-primary/10 to-transparent animate-scan" />
 
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 pb-10 md:px-6 md:pb-14">
         <div className="flex max-w-4xl flex-col gap-6">
@@ -76,20 +85,26 @@ export function Hero() {
             Prontidão 24/7
           </motion.p>
 
-          <h1 id="hero-title" className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            {words.map((w, i) => (
+          <h1
+            id="hero-title"
+            aria-label={titleText}
+            className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl"
+          >
+            {titleWords.map((w, i) => (
               <motion.span
-                key={i}
-                className="mr-[0.25em] inline-block"
+                key={w + i}
+                aria-hidden="true"
+                className="inline-block"
                 initial={reduce ? false : { opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
               >
-                {w}
+                {w}&nbsp;
               </motion.span>
-            ))}
+            ))}{' '}
             <motion.span
-              className="text-glow inline-block text-primary"
+              aria-hidden="true"
+              className="inline-block text-primary"
               initial={reduce ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -105,8 +120,7 @@ export function Hero() {
             className="max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground md:text-lg"
           >
             Consultoria, gestão de riscos, treinamentos, resgate técnico e atendimento pré-hospitalar para empresas
-            que tratam a vida como prioridade.{' '}
-            <span className="text-foreground">{siteConfig.slogan}.</span>
+            que tratam a vida como prioridade.
           </motion.p>
 
           <motion.div
@@ -139,7 +153,11 @@ export function Hero() {
             <div key={s.label} className="glass flex flex-col gap-1 p-4 md:p-6">
               <dt className="order-2 text-xs leading-snug text-muted-foreground md:text-sm">{s.label}</dt>
               <dd className="order-1 text-2xl font-semibold text-foreground md:text-4xl">
-                <Counter value={s.value} prefix={s.prefix} suffix={s.suffix} />
+                {s.kind === 'number' ? (
+                  <Counter value={s.value} prefix={s.prefix} suffix={s.suffix} />
+                ) : (
+                  <span className="font-mono">{s.text}</span>
+                )}
               </dd>
             </div>
           ))}

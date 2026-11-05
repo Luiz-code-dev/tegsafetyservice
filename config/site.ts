@@ -5,7 +5,7 @@ export const siteConfig = {
   tagline: 'Soluções em Segurança do Trabalho',
   description:
     'Engenharia e Segurança do Trabalho com atendimento em todo o Brasil: consultoria SST, PGR, APR, inspeções, treinamentos NR-35, NR-33, NR-10, bombeiro civil, APH para eventos e resgate técnico.',
-  url: 'https://tegsafetyservice.com.br',
+  url: 'https://www.tegsafetyservice.com.br',
   locale: 'pt_BR',
   contact: {
     email: 'contato@tegsafetyservice.com.br',
@@ -20,13 +20,18 @@ export const siteConfig = {
   },
   whatsappMessage:
     'Olá! Vim pelo site e gostaria de um diagnóstico de SST para minha empresa.',
-  company: {
-    legalName: '[RAZÃO SOCIAL]',
-    address: '[ENDEREÇO COMPLETO]',
+  /**
+   * Dados oficiais da empresa. Campos vazios não aparecem em nenhum lugar do site;
+   * preencha quando estiverem disponíveis (ex.: CNPJ após a emissão).
+   */
+  empresa: {
+    razaoSocial: '',
+    cnpj: '',
+    endereco: '',
   },
-  dpo: {
-    name: '[NOME DO ENCARREGADO]',
-    email: 'contato@tegsafetyservice.com.br',
+  encarregado: {
+    nome: '',
+    email: 'privacidade@tegsafetyservice.com.br',
   },
   social: {
     instagram: 'https://www.instagram.com/tegsafetyservice',
@@ -52,6 +57,9 @@ export const responsavelTecnicoLinha = `Responsável Técnico: Eng. ${siteConfig
  * Variações opcionais: teg-walk.png, teg-watch.png e teg-ball.png.
  */
 export const SHOW_MASCOT = false
+
+/** Ative somente com depoimentos reais e autorizados em /data/content.ts. */
+export const SHOW_TESTIMONIALS = false
 
 export const mascotAssets = {
   base: '/mascot/teg.png',

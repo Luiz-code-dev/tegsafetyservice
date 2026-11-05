@@ -18,6 +18,10 @@ export type Service = {
   icon: LucideIcon
   image: string
   items: string[]
+  /** Serviços da área de emergência recebem o acento vermelho. */
+  emergency?: boolean
+  /** Quando definido, o card leva a esta âncora em vez de abrir o painel. */
+  href?: string
 }
 
 export const services: Service[] = [
@@ -77,27 +81,18 @@ export const services: Service[] = [
   {
     slug: 'treinamentos',
     title: 'Treinamentos e Capacitações',
-    summary: 'NRs, reciclagens, integração, DDS, brigada, Lei Lucas, SBV e APH.',
+    summary: 'Capacitações em NRs, emergência e cultura de segurança, presenciais e in company.',
     icon: GraduationCap,
     image: '/images/treinamento-sala.png',
-    items: [
-      'NRs e reciclagens',
-      'Integração de segurança',
-      'DDS – Diálogo Diário de Segurança',
-      'Brigada de emergência',
-      'Lei Lucas (primeiros socorros)',
-      'SBV – Suporte Básico de Vida',
-      'APH – Atendimento Pré-Hospitalar',
-      'Treinamentos personalizados',
-      'Palestras e campanhas',
-    ],
+    items: [],
+    href: '#treinamentos',
   },
   {
     slug: 'mao-de-obra',
     title: 'Mão de Obra Especializada',
     summary: 'Técnicos de segurança, bombeiros civis, resgatistas e equipes de emergência.',
     icon: HardHat,
-    image: '/images/equipe-institucional.png',
+    image: '/images/mao-de-obra.png',
     items: [
       'Profissionais para atividades específicas',
       'Técnicos de segurança',
@@ -113,6 +108,7 @@ export const services: Service[] = [
     summary: 'Equipes de prontidão para resgate em altura e espaços confinados.',
     icon: Mountain,
     image: '/images/resgate-tecnico.png',
+    emergency: true,
     items: [
       'Equipes de prontidão',
       'Resgate em altura',
@@ -127,6 +123,7 @@ export const services: Service[] = [
     summary: 'APH, socorristas, enfermagem e ambulância para eventos e operações.',
     icon: Ambulance,
     image: '/images/aph-atendimento.png',
+    emergency: true,
     items: [
       'APH – Atendimento Pré-Hospitalar',
       'Equipes de primeiros socorros',
@@ -141,6 +138,7 @@ export const services: Service[] = [
     summary: 'Postos de prevenção, combate a princípios de incêndio e apoio em eventos.',
     icon: Flame,
     image: '/images/bombeiro-civil.png',
+    emergency: true,
     items: [
       'Postos de prevenção',
       'Combate a princípios de incêndio',

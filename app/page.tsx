@@ -7,14 +7,14 @@ import { Trainings } from '@/components/site/trainings'
 import { Emergency } from '@/components/site/emergency'
 import { Contractors } from '@/components/site/contractors'
 import { Experience } from '@/components/site/experience'
-import { Differentials } from '@/components/site/differentials'
 import { Gallery } from '@/components/site/gallery'
 import { Testimonials } from '@/components/site/testimonials'
+import { Clients } from '@/components/site/clients'
 import { Contact } from '@/components/site/contact'
 import { Footer } from '@/components/site/footer'
 import { WhatsAppFloat } from '@/components/site/whatsapp-float'
 import { MascotBand } from '@/components/site/mascot-band'
-import { SHOW_MASCOT } from '@/config/site'
+import { SHOW_MASCOT, SHOW_TESTIMONIALS } from '@/config/site'
 
 export default function Home() {
   return (
@@ -30,9 +30,9 @@ export default function Home() {
         <Emergency />
         <Contractors />
         <Experience />
-        <Differentials />
         <Gallery />
-        <Testimonials />
+        {SHOW_TESTIMONIALS && <Testimonials />}
+        <Clients />
         <Contact />
       </main>
       <Footer />

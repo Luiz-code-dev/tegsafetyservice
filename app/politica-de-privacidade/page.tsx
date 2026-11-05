@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  const { company, dpo, contact } = siteConfig
+  const { empresa, encarregado, contact } = siteConfig
+  const controlador = [empresa.razaoSocial || siteConfig.name, empresa.cnpj && `CNPJ ${empresa.cnpj}`]
+    .filter(Boolean)
+    .join(', ')
   return (
     <LegalPage
       title="Política de Privacidade"
@@ -18,8 +21,9 @@ export default function Page() {
     >
       <LegalSection title="1. Controlador dos dados">
         <p>
-          {company.legalName} ({siteConfig.name}), com sede em {company.address}, é a
-          controladora dos dados pessoais tratados neste site.
+          {controlador}
+          {empresa.endereco ? `, com sede em ${empresa.endereco},` : ''} é a controladora dos dados pessoais tratados
+          neste site.
         </p>
       </LegalSection>
       <LegalSection title="2. Dados que coletamos">
@@ -67,7 +71,11 @@ export default function Page() {
       </LegalSection>
       <LegalSection title="8. Encarregado (DPO)">
         <p>
-          {dpo.name} – <a href={`mailto:${dpo.email}`} className="text-primary underline underline-offset-4">{dpo.email}</a>.
+          {encarregado.nome ? `${encarregado.nome} – ` : 'Contato do Encarregado: '}
+          <a href={`mailto:${encarregado.email}`} className="text-primary underline underline-offset-4">
+            {encarregado.email}
+          </a>
+          .
           Você também pode contatar a ANPD em gov.br/anpd.
         </p>
       </LegalSection>
