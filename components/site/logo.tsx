@@ -1,55 +1,77 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { siteConfig } from '@/config/site'
-import { LogoMark } from './logo-mark'
 
-type Variant = 'horizontal' | 'full' | 'icon'
+type Variant = 'lockup' | 'full' | 'icon' | 'responsive'
+
+const assets = {
+  lockup: { light: '/brand/tg-logo-lockup.png', dark: '/brand/tg-logo-lockup-dark.png', w: 1332, h: 694 },
+  full: { light: '/brand/tg-logo-full.png', dark: '/brand/tg-logo-full-dark.png', w: 1332, h: 920 },
+  icon: { light: '/brand/tg-logo-icon.png', dark: '/brand/tg-logo-icon-dark.png', w: 1332, h: 534 },
+} as const
+
+function ThemedImage({
+  kind,
+  className,
+  priority,
+  alt,
+}: {
+  kind: keyof typeof assets
+  className?: string
+  priority?: boolean
+  alt: string
+}) {
+  const a = assets[kind]
+  return (
+    <>
+      <Image src={a.light} alt={alt} width={a.w} height={a.h} priority={priority} className={cn('w-auto dark:hidden', className)} />
+      <Image src={a.dark} alt={alt} width={a.w} height={a.h} priority={priority} className={cn('hidden w-auto dark:block', className)} />
+    </>
+  )
+}
 
 export function Logo({
-  variant = 'horizontal',
+  variant = 'lockup',
   className,
+  imageClassName,
   href = '/#inicio',
+  priority,
 }: {
   variant?: Variant
   className?: string
+  imageClassName?: string
   href?: string | null
+  priority?: boolean
 }) {
-  const content =
-    variant === 'icon' ? (
-      <LogoMark className="h-9" />
-    ) : variant === 'horizontal' ? (
-      <span className="flex h-9 items-center gap-2.5 md:h-10">
-        <LogoMark className="h-full" />
-        <span className="flex flex-col justify-center border-l border-border pl-2.5 font-heading text-xs leading-tight font-bold tracking-widest uppercase">
-          <span className="text-[var(--logo-green)]">Safety</span>
-          <span className="text-[var(--logo-text)]">Service</span>
-        </span>
-      </span>
-    ) : (
-      <span className="flex flex-col items-start gap-2">
-        <LogoMark className="h-16" />
-        <span className="font-heading text-xl leading-none font-extrabold tracking-wide uppercase">
-          <span className="text-[var(--logo-green)]">Safety</span> <span className="text-[var(--logo-text)]">Service</span>
-        </span>
-        <span className="text-[0.7rem] tracking-[0.18em] text-muted-foreground uppercase">{siteConfig.tagline}</span>
-      </span>
-    )
-
   const label = `${siteConfig.name} – ${siteConfig.tagline}`
 
-  if (href === null) {
-    return (
-      <span className={cn('inline-flex', className)} role="img" aria-label={label}>
-        {content}
-      </span>
+  const content =
+    variant === 'responsive' ? (
+      <>
+        <span className="flex md:hidden">
+          <ThemedImage kind="icon" alt={label} priority={priority} className="h-8" />
+        </span>
+        <span className="hidden md:flex">
+          <ThemedImage kind="lockup" alt={label} priority={priority} className="h-10" />
+        </span>
+      </>
+    ) : (
+      <ThemedImage kind={variant} alt={label} priority={priority} className={imageClassName ?? 'h-10'} />
     )
+
+  if (href === null) {
+    return <span className={cn('inline-flex shrink-0', className)}>{content}</span>
   }
 
   return (
     <Link
       href={href}
-      aria-label={`${label} – página inicial`}
-      className={cn('inline-flex rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring', className)}
+      aria-label={`${siteConfig.name} – página inicial`}
+      className={cn(
+        'inline-flex shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring',
+        className,
+      )}
     >
       {content}
     </Link>

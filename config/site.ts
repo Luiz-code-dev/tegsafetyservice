@@ -30,11 +30,23 @@ export const siteConfig = {
     email: 'contato@tegsafetyservice.com.br',
   },
   social: {
-    instagram: '#',
+    instagram: 'https://www.instagram.com/tegsafetyservice',
+    instagramHandle: '@tegsafetyservice',
     linkedin: '#',
     youtube: '#',
   },
+  responsavelTecnico: {
+    nome: 'Gabriel Carvalho da Silva',
+    titulo: 'Engenheiro de Segurança do Trabalho',
+    conselho: 'CREA-BA',
+    registro: '84637BA',
+    rnp: '0512065365',
+    situacao: 'Ativo',
+    registroDesde: '2013-05-23',
+  },
 } as const
+
+export const responsavelTecnicoLinha = `Responsável Técnico: Eng. ${siteConfig.responsavelTecnico.nome} · ${siteConfig.responsavelTecnico.titulo} · ${siteConfig.responsavelTecnico.conselho} ${siteConfig.responsavelTecnico.registro} · RNP ${siteConfig.responsavelTecnico.rnp}`
 
 /** Set to true once /public/models/teg.glb exists to render the real 3D mascot. */
 export const USE_3D_MODEL = false
@@ -44,12 +56,14 @@ export function whatsappUrl(message: string = siteConfig.whatsappMessage) {
 }
 
 export const navItems = [
-  { label: 'Início', href: '/#inicio' },
-  { label: 'A Empresa', href: '/#empresa' },
+  { label: 'Empresa', href: '/#empresa' },
   { label: 'Serviços', href: '/#servicos' },
-  { label: 'Normas (NRs)', href: '/#normas' },
   { label: 'Treinamentos', href: '/#treinamentos' },
-  { label: 'Emergência & Resgate', href: '/#emergencia' },
-  { label: 'Terceirizadas', href: '/#terceirizadas' },
+  { label: 'Emergência', href: '/#emergencia' },
   { label: 'Contato', href: '/#contato' },
+] as const
+
+export const secondaryNavItems = [
+  { label: 'Normas (NRs)', href: '/#normas' },
+  { label: 'Terceirizadas', href: '/#terceirizadas' },
 ] as const

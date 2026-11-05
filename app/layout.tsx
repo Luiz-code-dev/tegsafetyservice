@@ -51,7 +51,6 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ['/images/hero-porto.png'],
   },
-  icons: { icon: '/brand/logo-icon.svg', apple: '/images/logo-teg.png' },
   generator: 'v0.app',
 }
 
@@ -71,7 +70,19 @@ const jsonLd = {
   description: siteConfig.description,
   url: siteConfig.url,
   image: `${siteConfig.url}/images/hero-porto.png`,
-  logo: `${siteConfig.url}/images/logo-teg.png`,
+  logo: `${siteConfig.url}/brand/tg-logo-full.png`,
+  sameAs: [siteConfig.social.instagram],
+  employee: {
+    '@type': 'Person',
+    name: siteConfig.responsavelTecnico.nome,
+    jobTitle: siteConfig.responsavelTecnico.titulo,
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Registro profissional',
+      recognizedBy: { '@type': 'Organization', name: siteConfig.responsavelTecnico.conselho },
+      identifier: siteConfig.responsavelTecnico.registro,
+    },
+  },
   email: siteConfig.contact.email,
   telephone: '+55 71 99673-9533',
   areaServed: 'BR',

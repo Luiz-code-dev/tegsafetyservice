@@ -33,6 +33,15 @@ export function About() {
               </Reveal>
             ))}
           </ul>
+          <Reveal delay={0.3} className="flex flex-col gap-2 rounded-xl border border-primary/40 bg-accent/40 p-5">
+            <p className="font-mono text-xs tracking-wider text-primary uppercase">Responsável Técnico</p>
+            <p className="font-heading text-lg font-semibold">Eng. {siteConfig.responsavelTecnico.nome}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {siteConfig.responsavelTecnico.titulo} · {siteConfig.responsavelTecnico.conselho}{' '}
+              {siteConfig.responsavelTecnico.registro} · RNP {siteConfig.responsavelTecnico.rnp} · Registro{' '}
+              {siteConfig.responsavelTecnico.situacao.toLowerCase()} desde 2013
+            </p>
+          </Reveal>
         </div>
 
         <Reveal delay={0.1} className="relative">

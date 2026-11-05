@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { navItems, siteConfig, whatsappUrl } from '@/config/site'
+import { navItems, responsavelTecnicoLinha, secondaryNavItems, siteConfig, whatsappUrl } from '@/config/site'
 import { services } from '@/data/services'
 import { useConsent } from '@/components/consent/consent-provider'
 import { Logo } from './logo'
+import { InstagramIcon } from './instagram-icon'
 
 const legalLinks = [
   { label: 'Política de Privacidade', href: '/politica-de-privacidade' },
@@ -19,16 +20,25 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-card/60">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-2 md:px-6 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="flex flex-col gap-4">
-          <Logo variant="full" className="w-fit" />
+          <Logo variant="lockup" imageClassName="h-14" className="w-fit" />
           <p className="text-sm leading-relaxed text-muted-foreground">{siteConfig.slogan}.</p>
+          <a
+            href={siteConfig.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 whitespace-nowrap rounded-lg border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            <InstagramIcon className="size-4" />
+            {siteConfig.social.instagramHandle}
+          </a>
         </div>
 
         <nav aria-label="Rodapé – navegação" className="flex flex-col gap-3">
           <h2 className="text-sm font-semibold">Navegação</h2>
           <ul className="flex flex-col gap-2">
-            {navItems.map((n) => (
+            {[...navItems, ...secondaryNavItems].map((n) => (
               <li key={n.href}>
                 <Link href={n.href} className="text-sm text-muted-foreground hover:text-primary">
                   {n.label}
@@ -64,13 +74,21 @@ export function Footer() {
                 {siteConfig.contact.email}
               </a>
             </li>
+            <li>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                Instagram {siteConfig.social.instagramHandle}
+              </a>
+            </li>
             <li>{siteConfig.contact.coverage}</li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
+        <p className="mx-auto max-w-7xl px-4 pt-6 text-xs leading-relaxed text-muted-foreground sm:px-6 lg:px-8">
+          {responsavelTecnicoLinha}
+        </p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 text-xs text-muted-foreground sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
             © {year} {siteConfig.name}. CNPJ {siteConfig.company.cnpj}. Todos os direitos reservados.
           </p>
