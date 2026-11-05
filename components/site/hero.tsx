@@ -42,7 +42,7 @@ export function Hero() {
       ref={ref}
       id="inicio"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden pt-24"
+      className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden pt-20 md:pt-24"
     >
       <motion.div className="absolute inset-0 -z-20" style={{ y }}>
         <Image
@@ -73,7 +73,7 @@ export function Hero() {
               <span className="animate-pulse-ring absolute inline-flex size-full rounded-full bg-primary" />
               <span className="relative inline-flex size-2 rounded-full bg-primary" />
             </span>
-            {siteConfig.contact.cityDisplay} · Atendimento 24/7
+            Prontidão 24/7
           </motion.p>
 
           <h1 id="hero-title" className="text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
@@ -119,14 +119,14 @@ export function Hero() {
               href={whatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex h-13 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-primary-foreground shadow-[0_0_40px_-8px_var(--primary)] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="group inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               <WhatsAppIcon className="size-5" />
               Fale com um especialista
             </a>
             <a
               href="#servicos"
-              className="glass group inline-flex h-13 items-center justify-center gap-2 rounded-xl border border-border px-6 text-base font-medium text-foreground transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="glass group inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-border px-5 text-sm font-medium text-foreground transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               Conheça nossos serviços
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />

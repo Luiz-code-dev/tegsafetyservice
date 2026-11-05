@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     'bombeiro civil',
     'APH para eventos',
     'resgate técnico em altura',
-    'segurança do trabalho Salvador',
+    'segurança do trabalho em todo o Brasil',
   ],
   applicationName: siteConfig.name,
   alternates: { canonical: '/' },

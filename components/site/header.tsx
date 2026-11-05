@@ -32,7 +32,7 @@ function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="flex size-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
+      className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
       aria-label={mounted && resolvedTheme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
     >
       {mounted && resolvedTheme === 'light' ? <Moon className="size-4" aria-hidden /> : <Sun className="size-4" aria-hidden />}
@@ -56,8 +56,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-40 transition-all duration-300',
-        scrolled ? 'glass border-b border-border' : 'bg-transparent',
+        'fixed inset-x-0 top-0 z-40 border-b bg-background/80 backdrop-blur-md transition-colors duration-300',
+        scrolled ? 'border-border' : 'border-transparent',
       )}
     >
       <a
@@ -66,8 +66,8 @@ export function Header() {
       >
         Pular para o conteúdo
       </a>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:h-20 md:px-6">
-        <Logo className="h-11 md:h-12" priority />
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 md:h-16 md:px-6">
+        <Logo variant="horizontal" />
 
         <nav aria-label="Principal" className="hidden xl:block">
           <ul className="flex items-center gap-1">
@@ -90,13 +90,13 @@ export function Header() {
             href={whatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden h-10 items-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:inline-flex"
+            className="hidden h-9 items-center rounded-lg border border-primary/60 px-4 text-sm font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:inline-flex"
           >
-            Solicitar Orçamento
+            Fale com um especialista
           </a>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="flex size-10 items-center justify-center rounded-lg border border-border text-foreground xl:hidden"
+              className="flex size-9 items-center justify-center rounded-lg border border-border text-foreground xl:hidden"
               aria-label="Abrir menu"
             >
               <Menu className="size-5" aria-hidden />
@@ -122,9 +122,9 @@ export function Header() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto inline-flex h-12 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground"
+                className="mt-auto inline-flex h-10 items-center justify-center rounded-lg border border-primary/60 text-sm font-medium text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
               >
-                Solicitar Orçamento
+                Fale com um especialista
               </a>
             </SheetContent>
           </Sheet>

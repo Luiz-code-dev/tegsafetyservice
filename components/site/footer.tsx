@@ -21,10 +21,8 @@ export function Footer() {
     <footer className="border-t border-border bg-card/60">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-2 md:px-6 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
-          <Logo className="h-16 w-fit" />
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {siteConfig.tagline}. {siteConfig.slogan}.
-          </p>
+          <Logo variant="full" className="w-fit" />
+          <p className="text-sm leading-relaxed text-muted-foreground">{siteConfig.slogan}.</p>
         </div>
 
         <nav aria-label="Rodapé – navegação" className="flex flex-col gap-3">
@@ -66,7 +64,7 @@ export function Footer() {
                 {siteConfig.contact.email}
               </a>
             </li>
-            <li>{siteConfig.contact.cityDisplay}</li>
+            <li>{siteConfig.contact.coverage}</li>
           </ul>
         </div>
       </div>

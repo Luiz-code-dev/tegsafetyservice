@@ -66,6 +66,10 @@
   --ring: #3fae5a;
   --grid-line: rgb(11 93 59 / 0.07);
   --radius: 0.75rem;
+  --logo-green: #0b5d3b;
+  --logo-steel-from: #5a6168;
+  --logo-steel-to: #2b2f33;
+  --logo-text: #2b2f33;
 }
 
 /* Dark theme (default) — near-black with a green undertone */
@@ -93,6 +97,10 @@
   --input: rgb(244 247 245 / 0.14);
   --ring: #3fae5a;
   --grid-line: rgb(63 174 90 / 0.06);
+  --logo-green: #3fae5a;
+  --logo-steel-from: #d5dadf;
+  --logo-steel-to: #7a828a;
+  --logo-text: #f4f7f5;
 }
 
 @layer base {
@@ -156,10 +164,6 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-  }
-
-  .logo-tile {
-    background: #f4f7f5;
   }
 
   .text-glow {
